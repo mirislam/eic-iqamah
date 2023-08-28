@@ -6,3 +6,7 @@ This app provides a simple application to display prayer times which runs on iOS
 
 Please contact dev@eicsanjose.org for any question or feedback on this app
 
+### Notes
+Please make sure to get a new Google-Info.plist for your app. You can configure
+Firebase for your app here: https://console.firebase.google.com/
+
