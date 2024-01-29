@@ -30,11 +30,12 @@ class _IqamahPageState extends State<IqamahPage> {
   _selectDate(BuildContext context) async {
     DateTime now = new DateTime.now();
     DateTime firstDate = new DateTime(now.year, now.month, now.day);
+    DateTime lastDate = firstDate.add(Duration(days: 60));
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: firstDate,
-      lastDate: DateTime(2024),
+      lastDate: lastDate,
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
