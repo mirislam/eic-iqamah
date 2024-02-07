@@ -1,4 +1,4 @@
-package com.example.test1
+package org.eicsanjose.iqamah.iqamah
 
 import io.flutter.embedding.android.FlutterActivity
 
