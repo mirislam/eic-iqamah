@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'Iqamah_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
 void main() async {
@@ -29,15 +29,17 @@ Future<void> setupToken() async {
   //await saveTokenToDatabase(token!);
 
   // Any time the token refreshes, store this in the database too.
-  FirebaseMessaging.instance.onTokenRefresh.listen(saveTokenToDatabase);
+  //FirebaseMessaging.instance.onTokenRefresh.listen(saveTokenToDatabase);
 }
 
+/** 
 Future<void> saveTokenToDatabase(String token) async {
   String userId = getRandomString(10);
   await FirebaseFirestore.instance.collection('users').doc(userId).update({
     'tokens': FieldValue.arrayUnion([token]),
   });
 }
+**/
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
