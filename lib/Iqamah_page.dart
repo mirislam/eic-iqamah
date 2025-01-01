@@ -69,6 +69,7 @@ class _IqamahPageState extends State<IqamahPage> {
 
     // 3. On iOS, this helps to take the user permissions
     // print("Step 3");
+
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       badge: true,
@@ -93,6 +94,7 @@ class _IqamahPageState extends State<IqamahPage> {
         };
         var response = await registerDeviceToEIC(data);
       });
+
       // For handling the received notifications
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         // Parse the message received
@@ -157,9 +159,11 @@ class _IqamahPageState extends State<IqamahPage> {
   }
 
   Future<EICIqamah> fetchIqamahData(String prayerDate) async {
-    final response = await http.get(Uri.parse(
-        'https://www.eicsanjose.org/wp/iqamah_api.php?prayerDate=' +
-            prayerDate));
+    String prayerUrl =
+        'https://www.eicsanjose.org/wp/iqamah_api.php?prayerDate=' + prayerDate;
+    print("Get prayers: " + prayerUrl);
+    final response = await http.get(Uri.parse(prayerUrl));
+    print("Got the json?");
 
     try {
       eicIqamah = EICIqamah.fromJson(json.decode(response.body));
@@ -221,12 +225,10 @@ class _IqamahPageState extends State<IqamahPage> {
     List<Widget> buttons = [];
     //if (eicIqamah.notices != null && eicIqamah.notices!.isNotEmpty) {
     if (notificationTexts.length > 10) {
-      print('Add notify icon button');
       buttons.add(calIconButton);
       buttons.add(notifyIconButton);
     } else {
       buttons.add(calIconButton);
-      print('No notify icon button');
     }
     return buttons;
   }
@@ -238,11 +240,14 @@ class _IqamahPageState extends State<IqamahPage> {
     String dateString = dateFormat.format(DateTime.now());
 
     String hijriMonth = "Undefined";
-    String hijriDay = "Undefined";
-    String hijriYear = "Undefined";
+    //String hijriDay = "Undefined";
+    //String hijriYear = "Undefined";
+    int hijriYear = 1492;
+    int hijriDay = 1;
+    String hijriDate = "Undefined";
     // assign the values
-    hijriYear = eicIqamah.hijriYear ?? '1492';
-    hijriDay = eicIqamah.hijriDay ?? '1';
+    hijriYear = eicIqamah.hijriYear ?? 1492;
+    hijriDay = eicIqamah.hijriDay ?? 1;
     hijriMonth = eicIqamah.hijriMonth ?? '1';
 
     int eventsCount = 0;
@@ -257,9 +262,9 @@ class _IqamahPageState extends State<IqamahPage> {
         hijriMonth +
         '' +
         ' ' +
-        hijriDay +
+        hijriDay.toString() +
         ', ' +
-        hijriYear +
+        hijriYear.toString() +
         '\n';
 
     //String message1 = "";

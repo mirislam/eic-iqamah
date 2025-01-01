@@ -27,8 +27,8 @@ class EICIqamah {
   String? eventsText;
   List<String>? events = [];
   String? hijriMonth;
-  String? hijriDay;
-  String? hijriYear;
+  int? hijriDay;
+  int? hijriYear;
   OtherSalah? otherSalah;
   String? bannerLine1;
   String? bannerLine2;
