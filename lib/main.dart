@@ -17,29 +17,13 @@ void main() async {
 
 Future<void> setupToken() async {
   // Get the token each time the application loads
-  String? token = await FirebaseMessaging.instance.getToken().then((token) {
-    print('Got the token 1 ');
-    print(token);
-  });
+  String? token = await FirebaseMessaging.instance.getToken().then((token) {});
 
   print('Got token ');
   print(token);
   // Save the initial token to the database
   print('Calling saveToken');
-  //await saveTokenToDatabase(token!);
-
-  // Any time the token refreshes, store this in the database too.
-  //FirebaseMessaging.instance.onTokenRefresh.listen(saveTokenToDatabase);
 }
-
-/** 
-Future<void> saveTokenToDatabase(String token) async {
-  String userId = getRandomString(10);
-  await FirebaseFirestore.instance.collection('users').doc(userId).update({
-    'tokens': FieldValue.arrayUnion([token]),
-  });
-}
-**/
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
