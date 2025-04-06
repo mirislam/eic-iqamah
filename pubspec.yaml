@@ -41,10 +41,11 @@ dependencies:
   #irebase_messaging: ^11.2.12
   #cloud_firestore: ^4.14.0
   #flutter_icons: ^1.1.0
-  flutter_launcher_icons: ^0.9.2
+  flutter_launcher_icons: ^0.14.3
   url_launcher: ^6.1.0
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.10
+  flutter_native_splash: ^2.4.6
   # new versions
   #firebase_core: ^2.24.2
   #firebase_messaging: ^14.7.10
@@ -60,7 +61,7 @@ flutter_native_splash:
   color: "#ffffff"
 
 dev_dependencies:
-  flutter_native_splash: ^2.1.1
+  flutter_native_splash: ^2.4.6
   flutter_test:
     sdk: flutter
 
