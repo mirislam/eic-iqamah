@@ -399,8 +399,9 @@ class _IqamahPageState extends State<IqamahPage> {
               child: new CircularProgressIndicator(),
             ),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color.fromARGB(255, 25, 114, 0),
-        title: Text(title),
+        title: Text(title, style: TextStyle(color: Colors.white)),
         actions: _getActionButtons(context),
       ),
     );
