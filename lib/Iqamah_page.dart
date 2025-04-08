@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:iqamah/main.dart';
 
 import 'constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -295,6 +296,7 @@ class _IqamahPageState extends State<IqamahPage> {
         ? 'EIC Iqamah ${eicIqamah.dateInput}'
         : 'EIC Iqamah';
     return Scaffold(
+      drawer: const AppDrawer(),
       body: _loaded
           ? Container(
               width: double.maxFinite,

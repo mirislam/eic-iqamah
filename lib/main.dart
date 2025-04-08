@@ -6,6 +6,7 @@ import 'dart:math';
 import 'about_page.dart'; // Import the AboutPage
 import 'compass_page.dart'; // Import the CompassPage
 import 'chat_page.dart'; // Import the ChatPage
+import 'yearly_calendar.dart'; // Import the PrayerCalendarPage
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -89,7 +92,10 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Calendar'),
             onTap: () {
               Navigator.pop(context);
-              // Add navigation logic here
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PrayerCalendarPage()),
+              );
             },
           ),
           ListTile(
