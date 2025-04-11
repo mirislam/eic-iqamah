@@ -5,6 +5,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:ollama_dart/ollama_dart.dart'; // Import the Ollama Dart package
+import 'package:http/http.dart' as http;
 
 class ChatPage extends StatefulWidget {
   @override
@@ -15,9 +16,9 @@ class _ChatPageState extends State<ChatPage> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
   bool _isLoading = false;
-  final String chatUrl = "https://chat.mirislam.com/api";
+  final String chatUrl = "https://chat.mirislam.com/api/generate";
   final String llmModel =
-      "gemma3"; // this actually does not matter as RAG server will determine which model to use
+      "gemma3"; // This actually does not matter as RAG server will determine which model to use
 
   Future<void> _sendMessage(String message) async {
     print(
@@ -28,29 +29,39 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     try {
-      final client = OllamaClient(baseUrl: chatUrl); // Create an Ollama client
-      final stream = client.generateChatCompletionStream(
-        request: GenerateChatCompletionRequest(
-          model: llmModel, // Specify the model
-          messages: [
-            Message(role: MessageRole.user, content: message),
-          ],
-        ),
+      // Define the API endpoint
+      final url = Uri.parse(chatUrl);
+
+      // Create the request body
+      final requestBody = jsonEncode({
+        "model": llmModel, // Specify the model
+        "stream": false, // Disable streaming
+        "prompt": message, // User input
+      });
+
+      // Send the POST request
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: requestBody,
       );
 
-      String streamedResponse = '';
-      await for (final res in stream) {
-        streamedResponse += (res.message?.content ?? ''); //.trim();
-        final htmlResponse = md.markdownToHtml(streamedResponse);
-        //final htmlResponse = streamedResponse;
-        print(
-            'Streamed response: $htmlResponse'); // Debug print to check the streamed response
+      // Check if the response is successful
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final htmlResponse = md.markdownToHtml(responseData['response'] ?? '');
+        print('Response: $htmlResponse'); // Debug print to check the response
+
         setState(() {
-          if (_messages.isNotEmpty && _messages.last.containsKey('bot')) {
-            _messages.last['bot'] = htmlResponse; // Update the last bot message
-          } else {
-            _messages.add({'bot': htmlResponse}); // Add a new bot message
-          }
+          _messages.add({
+            'bot': htmlResponse
+          }); // Add the bot's response to the chat history
+        });
+      } else {
+        print('Error: ${response.statusCode} - ${response.body}');
+        setState(() {
+          _messages
+              .add({'bot': 'Error: Unable to fetch response from server.'});
         });
       }
     } catch (e) {
@@ -66,15 +77,15 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    Icon robot = Icon(FontAwesomeIcons.warning, color: Colors.red);
+    Icon robot =
+        const Icon(FontAwesomeIcons.triangleExclamation, color: Colors.red);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'EIC Chatbot',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
-
-        backgroundColor: Color.fromARGB(255, 25, 114, 0),
+        backgroundColor: const Color.fromARGB(255, 25, 114, 0),
         iconTheme: const IconThemeData(
             color: Colors.white), // Set back button color to white
       ),
