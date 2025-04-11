@@ -16,7 +16,7 @@ class AboutPage extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                'assets/images/eic_logo_transparent1.png', // Ensure this path is correct
+                'assets/images/eic_logo_1024_transparent.png', // Ensure this path is correct
                 height: 100,
               ),
             ),

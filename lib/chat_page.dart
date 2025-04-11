@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:ollama_dart/ollama_dart.dart'; // Import the Ollama Dart package
 
@@ -14,6 +15,9 @@ class _ChatPageState extends State<ChatPage> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
   bool _isLoading = false;
+  final String chatUrl = "https://chat.mirislam.com/api";
+  final String llmModel =
+      "gemma3"; // this actually does not matter as RAG server will determine which model to use
 
   Future<void> _sendMessage(String message) async {
     print(
@@ -24,10 +28,10 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     try {
-      final client = OllamaClient(); // Create an Ollama client
+      final client = OllamaClient(baseUrl: chatUrl); // Create an Ollama client
       final stream = client.generateChatCompletionStream(
         request: GenerateChatCompletionRequest(
-          model: 'phi4', // Specify the model
+          model: llmModel, // Specify the model
           messages: [
             Message(role: MessageRole.user, content: message),
           ],
@@ -62,16 +66,26 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    Icon robot = Icon(FontAwesomeIcons.warning, color: Colors.red);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'EIC Chatbot',
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
+
         backgroundColor: Color.fromARGB(255, 25, 114, 0),
+        iconTheme: const IconThemeData(
+            color: Colors.white), // Set back button color to white
       ),
       body: Column(
         children: [
+          Card(
+            child: ListTile(
+                leading: robot,
+                title: const Text(
+                    'Our ChatBot is Under Development. May return inaccurate results.')),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,
@@ -153,6 +167,8 @@ class _ChatPageState extends State<ChatPage> {
                       contentPadding:
                           const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 25, 114, 0)),
                           borderRadius: BorderRadius.circular(32.0)),
                     ),
                   ),

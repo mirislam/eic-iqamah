@@ -328,13 +328,13 @@ class _IqamahPageState extends State<IqamahPage> {
                                 child: Column(children: [
                                   CircleAvatar(
                                       radius: (52),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 4, 84, 4),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 255, 255, 255),
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         child: Image.asset(
-                                            "assets/images/eic_logo_1024.png"),
+                                            "assets/images/eic_logo_1024_transparent.png"),
                                       )),
                                   textButton
                                 ])),

@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'Iqamah_page.dart';
 import 'dart:math';
-import 'about_page.dart'; // Import the AboutPage
+import 'new_about_page.dart'; // Import the AboutPage
 import 'compass_page.dart'; // Import the CompassPage
 import 'chat_page.dart'; // Import the ChatPage
 import 'yearly_calendar.dart'; // Import the PrayerCalendarPage
@@ -66,7 +66,7 @@ class AppDrawer extends StatelessWidget {
                           25, // Adjusted radius to fit within the new height
                       backgroundColor: const Color.fromARGB(255, 4, 84, 4),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(50),
                         child: Image.asset("assets/images/eic_logo_200.png"),
                       ),
                     ),
@@ -98,6 +98,7 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
+          /** For future 
           ListTile(
             leading: Icon(Icons.notifications),
             title: const Text('Notifications'),
@@ -113,7 +114,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               // Add navigation logic here
             },
-          ),
+          ), **/
           ListTile(
             leading: Icon(Icons.explore), // Compass icon
             title: const Text('Compass'),
@@ -143,7 +144,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutPage()),
+                MaterialPageRoute(builder: (context) => NewAboutPage()),
               );
             },
           ),

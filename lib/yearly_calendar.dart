@@ -69,6 +69,8 @@ class _PrayerCalendarPageState extends State<PrayerCalendarPage> {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(255, 25, 114, 0),
+        iconTheme: const IconThemeData(
+            color: Colors.white), // Set back button color to white
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
