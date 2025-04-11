@@ -289,8 +289,8 @@ class _IqamahPageState extends State<IqamahPage> {
       style: ButtonStyle(
           foregroundColor:
               MaterialStateProperty.all<Color>(Color.fromARGB(255, 3, 82, 6))),
-      icon: Icon(Icons.paypal, size: 18),
-      label: Text("Donate"),
+      icon: Icon(Icons.paypal, size: 20),
+      label: Text("Donate", style: TextStyle(fontSize: 10)),
     );
     var title = (eicIqamah.dateInput != null)
         ? 'EIC Iqamah ${eicIqamah.dateInput}'

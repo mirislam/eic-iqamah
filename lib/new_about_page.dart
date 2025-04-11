@@ -41,6 +41,17 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
                   ),
                 ),
                 const Positioned(
+                  top: 60,
+                  right: 20,
+                  child: Text(
+                    "v1.0.7",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const Positioned(
                   bottom: 20,
                   left: 20,
                   child: Column(
@@ -78,6 +89,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
                   _buildFeatureIcon(Icons.facebook, 'Facebook', () async {
                     const url = 'https://www.facebook.com/evergreenmasjid';
                     if (await canLaunchUrl(Uri.parse(url))) {
+                      print('Clicked Facebook');
                       await launchUrl(Uri.parse(url),
                           mode: LaunchMode.externalApplication);
                     }
@@ -122,7 +134,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  _buildBookingCard('About Us', '', aboutUsText),
+                  _buildCard('About Us', aboutUsText),
                 ],
               ),
             ),
@@ -155,7 +167,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
   }
 
   // Helper method to build booking cards
-  Widget _buildBookingCard(String title, String rating, String reviews) {
+  Widget _buildCard(String title, String body) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -171,9 +183,9 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             const SizedBox(height: 5),
-            Text(
-              rating,
-              style: const TextStyle(
+            const Text(
+              '',
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
                 color: Colors.black,
@@ -181,8 +193,8 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
             ),
             const SizedBox(height: 5),
             Text(
-              reviews,
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
+              body,
+              style: const TextStyle(fontSize: 12, color: Colors.black54),
             ),
           ],
         ),
