@@ -44,7 +44,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
                   top: 60,
                   right: 20,
                   child: Text(
-                    "v1.0.7",
+                    "v1.0.8",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,

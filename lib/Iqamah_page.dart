@@ -31,7 +31,7 @@ class _IqamahPageState extends State<IqamahPage> {
   _selectDate(BuildContext context) async {
     DateTime now = new DateTime.now();
     DateTime firstDate = new DateTime(now.year, now.month, now.day);
-    DateTime lastDate = firstDate.add(Duration(days: 60));
+    DateTime lastDate = firstDate.add(const Duration(days: 60));
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -40,7 +40,7 @@ class _IqamahPageState extends State<IqamahPage> {
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light().copyWith(
+            colorScheme: const ColorScheme.light().copyWith(
               primary: Color.fromARGB(255, 15, 84, 0),
             ),
           ),
@@ -277,25 +277,26 @@ class _IqamahPageState extends State<IqamahPage> {
     var objMessage1 = Text(message1,
         style: TextStyle(
             fontSize: 12,
-            color: Color.fromARGB(255, 1, 56, 25).withOpacity(0.8)));
+            color: const Color.fromARGB(255, 1, 56, 25).withOpacity(0.8)));
     var objMessage2 = Text(message2,
         style: TextStyle(
             fontSize: 12,
-            color: Color.fromARGB(255, 1, 56, 25).withOpacity(0.8)));
+            color: const Color.fromARGB(255, 1, 56, 25).withOpacity(0.8)));
     var textButton = TextButton.icon(
       onPressed: () {
         _launchURL('https://www.eicsanjose.org/wp/donations');
       },
       style: ButtonStyle(
-          foregroundColor:
-              MaterialStateProperty.all<Color>(Color.fromARGB(255, 3, 82, 6))),
-      icon: Icon(Icons.paypal, size: 20),
-      label: Text("Donate", style: TextStyle(fontSize: 10)),
+          foregroundColor: MaterialStateProperty.all<Color>(
+              const Color.fromARGB(255, 3, 82, 6))),
+      icon: const Icon(Icons.paypal, size: 20),
+      label: const Text("Donate", style: TextStyle(fontSize: 10)),
     );
     var title = (eicIqamah.dateInput != null)
         ? 'EIC Iqamah ${eicIqamah.dateInput}'
         : 'EIC Iqamah';
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: const AppDrawer(),
       body: _loaded
           ? Container(
@@ -377,7 +378,6 @@ class _IqamahPageState extends State<IqamahPage> {
                           children: [
                             Expanded(
                               flex: 4,
-                              //child: buildCard4('Fajr', '6:00', '5:37', '640'),
                               child: buildCard4('Isha العشاء', eicIqamah.isha,
                                   eicIqamah.ishaStart, eicIqamah.ishaStop),
                             ),
@@ -401,9 +401,9 @@ class _IqamahPageState extends State<IqamahPage> {
               child: new CircularProgressIndicator(),
             ),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color.fromARGB(255, 25, 114, 0),
-        title: Text(title, style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color.fromARGB(255, 25, 114, 0),
+        title: Text(title, style: const TextStyle(color: Colors.white)),
         actions: _getActionButtons(context),
       ),
     );
@@ -413,7 +413,6 @@ class _IqamahPageState extends State<IqamahPage> {
 Widget getNewsRows(EICIqamah eicIqamah, int position) {
   return GestureDetector(
       onTap: () {
-        print('Clicked news item');
         _launchURL('https://www.eicsanjose.org/wp');
       },
       child: Row(
@@ -421,7 +420,7 @@ Widget getNewsRows(EICIqamah eicIqamah, int position) {
           Expanded(
             flex: 12,
             child: ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.event_available_rounded,
                 color: Color.fromARGB(255, 1, 107, 5),
               ), //FlutterLogo(size: 72.0),
@@ -457,6 +456,7 @@ Container buildCard4(String prayerName, prayerTime, startTime, endTime) {
       height: 120,
       width: 155,
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
@@ -505,14 +505,14 @@ Container buildJummahCard(EICIqamah eicIqamah) {
       height: 120,
       width: 155,
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
             ListTile(
-              title: Text(
+              title: const Text(
                 'Jumu\'ah الجمعة',
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 textAlign: TextAlign.center,
               ),
               subtitle: Text(

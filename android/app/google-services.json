@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "608602112137",
+    "project_id": "eiciqamah",
+    "storage_bucket": "eiciqamah.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608602112137:android:93567354b53ee1cc508658",
+        "android_client_info": {
+          "package_name": "org.eicsanjose.iqamah.iqamah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608602112137-01jnqt6jbd8ujbh32654r5hvk4p411rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.eicsanjose.iqamah.iqamah",
+            "certificate_hash": "1a6eba0d2bd8d50e13fee5013282211a0f647280"
+          }
+        },
+        {
+          "client_id": "608602112137-tj7mtchc1fc12hrli5hltdltek5qaqld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATPq-rvB8kVgZ_y5E2eTtXV4HbvcPACaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608602112137-t32oeslscd6da0pgac4u4c3rd07k575d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608602112137-1kq95v1i9i1p92jqkk8l14uni6chdt09.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.eicsanjose.i"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,9 +13,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
+    name: "eiciqamah",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,12 +28,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {'/': (context) => HomePage()},
+      routes: {'/': (context) => const HomePage()},
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +92,7 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.calendar_today),
+            leading: const Icon(Icons.calendar_today),
             title: const Text('Calendar'),
             onTap: () {
               Navigator.pop(context);
@@ -117,7 +120,7 @@ class AppDrawer extends StatelessWidget {
             },
           ), **/
           ListTile(
-            leading: Icon(Icons.explore), // Compass icon
+            leading: const Icon(Icons.explore), // Compass icon
             title: const Text('Compass'),
             onTap: () {
               Navigator.pop(context);
@@ -128,7 +131,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.chat),
+            leading: const Icon(Icons.chat),
             title: const Text('Chat'),
             onTap: () {
               Navigator.pop(context);
@@ -139,7 +142,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.info),
+            leading: const Icon(Icons.info),
             title: const Text('About'),
             onTap: () {
               Navigator.pop(context);
@@ -149,6 +152,7 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
+          /** Login page for future
           ListTile(
             leading: const Icon(Icons.login),
             title: const Text('Login'),
@@ -159,7 +163,7 @@ class AppDrawer extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
-          ),
+          ),**/
         ],
       ),
     );
