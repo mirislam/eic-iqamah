@@ -7,6 +7,7 @@ import 'new_about_page.dart'; // Import the AboutPage
 import 'compass_page.dart'; // Import the CompassPage
 import 'chat_page.dart'; // Import the ChatPage
 import 'yearly_calendar.dart'; // Import the PrayerCalendarPage
+import 'login_page.dart'; // Import the LoginPage
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -145,6 +146,17 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => NewAboutPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.login),
+            title: const Text('Login'),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
           ),

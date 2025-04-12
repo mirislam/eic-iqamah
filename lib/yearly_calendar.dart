@@ -19,8 +19,7 @@ class _PrayerCalendarPageState extends State<PrayerCalendarPage> {
   }
 
   Future<void> _fetchPrayerData() async {
-    const url =
-        'https://www.eicsanjose.org/wp/yearly_cal.json'; // Replace with actual URL
+    const url = 'https://www.eicsanjose.org/wp/yearly_cal.json';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -68,7 +67,7 @@ class _PrayerCalendarPageState extends State<PrayerCalendarPage> {
           'Yearly Prayer Calendar',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromARGB(255, 25, 114, 0),
+        backgroundColor: const Color.fromARGB(255, 25, 114, 0),
         iconTheme: const IconThemeData(
             color: Colors.white), // Set back button color to white
       ),
@@ -103,7 +102,7 @@ class _PrayerCalendarPageState extends State<PrayerCalendarPage> {
                           child: ListTile(
                               leading: CircleAvatar(
                                   backgroundColor:
-                                      Color.fromARGB(255, 232, 232, 249),
+                                      const Color.fromARGB(255, 232, 232, 249),
                                   child: Text(displayDate,
                                       style: const TextStyle(fontSize: 12))),
                               subtitle: Text(rowText,
