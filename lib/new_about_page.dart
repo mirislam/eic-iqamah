@@ -2,17 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart' as UrlLauncher;
+import 'package:package_info_plus/package_info_plus.dart';
 
-class NewAboutPage extends StatelessWidget {
+class NewAboutPage extends StatefulWidget {
+  @override
+  _NewAboutPageState createState() => _NewAboutPageState();
+}
+
+class _NewAboutPageState extends State<NewAboutPage> {
+  Icon instaIcon = const Icon(FontAwesomeIcons.instagram);
+  Icon youtubeIcon = const Icon(FontAwesomeIcons.youtube);
+  String version = '';
+  String buildNumber = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      version = info.version;
+      buildNumber = info.buildNumber;
+    });
+  }
+
+  String aboutUsText = '''
+Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving the Muslim community in San Jose, California. Our mission is to provide a welcoming and inclusive environment for all individuals, regardless of their background or beliefs. We strive to promote understanding and respect among diverse communities through education, outreach, and interfaith dialogue.The journey of Evergreen Islamic Center traces back to the acquisition of land nestled within the beautiful hills of Evergreen in 1989 by the community members who recognized the growing need for a mosque in the Evergreen area. Subsequent efforts were made to start offering prayers at the facility, and construction of a full-blown mosque was kicked off in 2010. Through fundraising efforts, community support, and tireless dedication, the EIC community worked towards the realization of their dream.
+    ''';
+
   @override
   Widget build(BuildContext context) {
-    Icon instaIcon = const Icon(FontAwesomeIcons.instagram);
-    Icon youtubeIcon = const Icon(FontAwesomeIcons.youtube);
-    //show move it string file
-    String aboutUsText = '''
-Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving the Muslim community in San Jose, California. Our mission is to provide a welcoming and inclusive environment for all individuals, regardless of their background or beliefs. We strive to promote understanding and respect among diverse communities through education, outreach, and interfaith dialogue.The journey of Evergreen Islamic Center traces back to the acquisition of land nestled within the beautiful hills of Evergreen in 1989 by the community members who recognized the growing need for a mosque in the Evergreen area. Subsequent efforts were made to start offering prayers at the facility, and construction of a full-blown mosque was kicked off in 2010. Through fundraising efforts, community support, and tireless dedication, the EIC community worked towards the realization of their dream.
-
-    ''';
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -40,12 +62,12 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
                     },
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   top: 60,
                   right: 20,
                   child: Text(
-                    "v1.0.8",
-                    style: TextStyle(
+                    '$version-$buildNumber',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
                     ),
