@@ -44,7 +44,7 @@ signingConfigs {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        minSdkVersion(23)
+        minSdkVersion(34)
         ndkVersion = "27.0.12077973"
         
     }
