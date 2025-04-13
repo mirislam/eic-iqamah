@@ -12,10 +12,16 @@ import 'login_page.dart'; // Import the LoginPage
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //await Firebase.initializeApp(
+  //  name: "eiciqamah",
+  //  options: DefaultFirebaseOptions.currentPlatform,
+  //);
+  //await Firebase.initializeApp();
   await Firebase.initializeApp(
     name: "eiciqamah",
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  print("Firebase initialized");
   runApp(const MyApp());
 }
 
@@ -152,18 +158,6 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
-          /** Login page for future
-          ListTile(
-            leading: const Icon(Icons.login),
-            title: const Text('Login'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          ),**/
         ],
       ),
     );

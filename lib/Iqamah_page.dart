@@ -14,6 +14,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:math';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
+import 'firebase_options.dart';
 
 class IqamahPage extends StatefulWidget {
   IqamahPage({Key? key}) : super(key: key);
@@ -63,13 +64,17 @@ class _IqamahPageState extends State<IqamahPage> {
     //print("Step 1");
     // 1. Initialize the Firebase app
     //await Firebase.initializeApp();
-
+    //await Firebase.initializeApp(
+    //  name: "eiciqamah",
+    //  options: DefaultFirebaseOptions.currentPlatform,
+    //);
     // 2. Instantiate Firebase Messaging
-    //print("Step 2");
+    print("Step 2");
+    //await Firebase.initializeApp();
     _messaging = FirebaseMessaging.instance;
 
     // 3. On iOS, this helps to take the user permissions
-    // print("Step 3");
+    print("Step 3");
 
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
