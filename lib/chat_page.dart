@@ -49,12 +49,13 @@ class _ChatPageState extends State<ChatPage> {
       // Check if the response is successful
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
+
         final htmlResponse = md.markdownToHtml(responseData['response'] ?? '');
         print('Response: $htmlResponse'); // Debug print to check the response
 
         setState(() {
           _messages.add({
-            'bot': htmlResponse
+            'bot': htmlResponse.replaceAll(RegExp(r'[^\x20-\x7E]'), '')
           }); // Add the bot's response to the chat history
         });
       } else {
