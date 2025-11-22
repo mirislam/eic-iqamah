@@ -100,49 +100,49 @@ class EICIqamah {
     hijriDay = json['hijri_day'];
     hijriYear = json['hijri_year'];
     otherSalah = json['other_salah'] != null
-        ? new OtherSalah.fromJson(json['other_salah'])
+        ? OtherSalah.fromJson(json['other_salah'])
         : null;
     bannerLine1 = json['bannerLine1'];
     bannerLine2 = json['bannerLine2'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['date_input'] = this.dateInput;
-    data['salat_date'] = this.salatDate;
-    data['fajr_start'] = this.fajrStart;
-    data['fajr'] = this.fajr;
-    data['fajr_stop'] = this.fajrStop;
-    data['duhr_start'] = this.duhrStart;
-    data['duhr'] = this.duhr;
-    data['duhr_stop'] = this.duhrStop;
-    data['asr_start'] = this.asrStart;
-    data['asr'] = this.asr;
-    data['asr_stop'] = this.asrStop;
-    data['maghrib_start'] = this.maghribStart;
-    data['maghrib'] = this.maghrib;
-    data['maghrib_stop'] = this.maghribStop;
-    data['isha_start'] = this.ishaStart;
-    data['isha'] = this.isha;
-    data['isha_stop'] = this.ishaStop;
-    data['jummah1'] = this.jummah1;
-    data['jummah2'] = this.jummah2;
-    data['jummah3'] = this.jummah3;
-    data['jummah_khateeb1'] = this.jummahKhateeb1;
-    data['jummah_khateeb2'] = this.jummahKhateeb2;
-    data['jummah_khateeb3'] = this.jummahKhateeb3;
-    data['notices_text'] = this.noticesText;
-    data['notices'] = this.notices;
-    data['events_text'] = this.eventsText;
-    data['events'] = this.events;
-    data['hijri_month'] = this.hijriMonth;
-    data['hijri_day'] = this.hijriDay;
-    data['hijri_year'] = this.hijriYear;
-    if (this.otherSalah != null) {
-      data['other_salah'] = this.otherSalah!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['date_input'] = dateInput;
+    data['salat_date'] = salatDate;
+    data['fajr_start'] = fajrStart;
+    data['fajr'] = fajr;
+    data['fajr_stop'] = fajrStop;
+    data['duhr_start'] = duhrStart;
+    data['duhr'] = duhr;
+    data['duhr_stop'] = duhrStop;
+    data['asr_start'] = asrStart;
+    data['asr'] = asr;
+    data['asr_stop'] = asrStop;
+    data['maghrib_start'] = maghribStart;
+    data['maghrib'] = maghrib;
+    data['maghrib_stop'] = maghribStop;
+    data['isha_start'] = ishaStart;
+    data['isha'] = isha;
+    data['isha_stop'] = ishaStop;
+    data['jummah1'] = jummah1;
+    data['jummah2'] = jummah2;
+    data['jummah3'] = jummah3;
+    data['jummah_khateeb1'] = jummahKhateeb1;
+    data['jummah_khateeb2'] = jummahKhateeb2;
+    data['jummah_khateeb3'] = jummahKhateeb3;
+    data['notices_text'] = noticesText;
+    data['notices'] = notices;
+    data['events_text'] = eventsText;
+    data['events'] = events;
+    data['hijri_month'] = hijriMonth;
+    data['hijri_day'] = hijriDay;
+    data['hijri_year'] = hijriYear;
+    if (otherSalah != null) {
+      data['other_salah'] = otherSalah!.toJson();
     }
-    data['bannerLine1'] = this.bannerLine1;
-    data['bannerLine2'] = this.bannerLine2;
+    data['bannerLine1'] = bannerLine1;
+    data['bannerLine2'] = bannerLine2;
     return data;
   }
 }
@@ -161,10 +161,10 @@ class OtherSalah {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['shurooq'] = this.shurooq;
-    data['ishraq'] = this.ishraq;
-    data['chasath'] = this.chasath;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['shurooq'] = shurooq;
+    data['ishraq'] = ishraq;
+    data['chasath'] = chasath;
     return data;
   }
 }

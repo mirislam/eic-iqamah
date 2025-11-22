@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'iqamah_page.dart'; // Import the Iqamah page
+import 'iqamah_screen.dart'; // Import the Iqamah page
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   Future<User?> _signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -83,7 +85,7 @@ class LoginPage extends StatelessWidget {
                   // Navigate to the Iqamah page after successful login
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => IqamahPage()),
+                    MaterialPageRoute(builder: (context) => const IqamahPage()),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(

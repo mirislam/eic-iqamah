@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PrayerCalendarPage extends StatefulWidget {
+  const PrayerCalendarPage({Key? key}) : super(key: key);
+
   @override
   _PrayerCalendarPageState createState() => _PrayerCalendarPageState();
 }

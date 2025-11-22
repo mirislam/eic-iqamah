@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iqamah/chat_page.dart';
+import 'package:iqamah/screens/chat_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -11,7 +11,7 @@ import 'chat_page_test.mocks.dart';
 @GenerateMocks([http.Client])
 void main() {
   testWidgets('ChatPage has a title and a message field', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: ChatPage()));
+    await tester.pumpWidget(const MaterialApp(home: ChatPage()));
     final titleFinder = find.text('EIC Chatbot');
     final textFieldFinder = find.byType(TextField);
     expect(titleFinder, findsOneWidget);
@@ -31,7 +31,7 @@ void main() {
       }),
     )).thenAnswer((_) async => http.Response(jsonEncode({'response': 'Hi there!'}), 200));
 
-    await tester.pumpWidget(MaterialApp(home: ChatPage()));
+    await tester.pumpWidget(const MaterialApp(home: ChatPage()));
 
     await tester.enterText(find.byType(TextField), 'Hello');
     await tester.tap(find.byType(IconButton));

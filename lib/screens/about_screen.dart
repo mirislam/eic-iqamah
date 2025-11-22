@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher_string.dart' as UrlLauncher;
 import 'package:package_info_plus/package_info_plus.dart';
 
 class NewAboutPage extends StatefulWidget {
+  const NewAboutPage({Key? key}) : super(key: key);
+
   @override
   _NewAboutPageState createState() => _NewAboutPageState();
 }
@@ -151,7 +153,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
               ),
             ),
 
-            // Booking Section
+            // About Us Section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -188,7 +190,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
     );
   }
 
-  // Helper method to build booking cards
+  // Helper method to build cards
   Widget _buildCard(String title, String body) {
     return Expanded(
       child: Container(

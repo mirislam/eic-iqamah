@@ -3,6 +3,8 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'dart:math';
 
 class CompassPage extends StatelessWidget {
+  const CompassPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +14,7 @@ class CompassPage extends StatelessWidget {
           style:
               TextStyle(color: Colors.white), // Set title text color to white
         ),
-        backgroundColor: Color.fromARGB(255, 25, 114, 0),
+        backgroundColor: const Color.fromARGB(255, 25, 114, 0),
         iconTheme: const IconThemeData(
             color: Colors.white), // Set back button color to white
       ),

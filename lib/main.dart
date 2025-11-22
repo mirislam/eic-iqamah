@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'Iqamah_page.dart';
+import 'services/firebase_options.dart';
+import 'screens/iqamah_screen.dart';
 import 'dart:math';
-import 'new_about_page.dart'; // Import the AboutPage
-import 'compass_page.dart'; // Import the CompassPage
-import 'chat_page.dart'; // Import the ChatPage
-import 'yearly_calendar.dart'; // Import the PrayerCalendarPage
-import 'login_page.dart'; // Import the LoginPage
+import 'screens/about_screen.dart'; // Import the AboutPage
+import 'screens/compass_screen.dart'; // Import the CompassPage
+import 'screens/chat_screen.dart'; // Import the ChatPage
+import 'screens/calendar_screen.dart'; // Import the PrayerCalendarPage
+// Import the LoginPage
+
+import 'package:provider/provider.dart';
+import 'providers/iqamah_provider.dart';
+import 'providers/chat_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //await Firebase.initializeApp(
-  //  name: "eiciqamah",
-  //  options: DefaultFirebaseOptions.currentPlatform,
-  //);
-  //await Firebase.initializeApp();
   await Firebase.initializeApp(
     name: "eiciqamah",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   print("Firebase initialized");
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => IqamahProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +38,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        primaryColor: const Color.fromARGB(255, 25, 114, 0),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 25, 114, 0),
+          primary: const Color.fromARGB(255, 25, 114, 0),
+        ),
+        useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 25, 114, 0),
+          foregroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 25, 114, 0),
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {'/': (context) => const HomePage()},
@@ -44,8 +69,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const AppDrawer(), // Add the drawer here
+    return const Scaffold(
+      drawer: AppDrawer(), // Add the drawer here
       body: IqamahPage(), // Your existing page
     );
   }
@@ -104,7 +129,8 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PrayerCalendarPage()),
+                MaterialPageRoute(
+                    builder: (context) => const PrayerCalendarPage()),
               );
             },
           ),
@@ -132,7 +158,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CompassPage()),
+                MaterialPageRoute(builder: (context) => const CompassPage()),
               );
             },
           ),
@@ -143,7 +169,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChatPage()),
+                MaterialPageRoute(builder: (context) => const ChatPage()),
               );
             },
           ),
@@ -154,7 +180,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewAboutPage()),
+                MaterialPageRoute(builder: (context) => const NewAboutPage()),
               );
             },
           ),

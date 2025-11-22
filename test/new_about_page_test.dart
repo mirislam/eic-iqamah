@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iqamah/new_about_page.dart';
+import 'package:iqamah/screens/about_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
       buildNumber: '1',
       buildSignature: 'buildSignature',
     );
-    await tester.pumpWidget(MaterialApp(home: NewAboutPage()));
+    await tester.pumpWidget(const MaterialApp(home: NewAboutPage()));
     final titleFinder = find.text('Evergreen Islamic Center');
     final backButtonFinder = find.byIcon(Icons.arrow_back);
     expect(titleFinder, findsOneWidget);
