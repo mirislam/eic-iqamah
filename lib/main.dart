@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'services/firebase_options.dart';
@@ -7,7 +8,7 @@ import 'screens/about_screen.dart'; // Import the AboutPage
 import 'screens/compass_screen.dart'; // Import the CompassPage
 import 'screens/chat_screen.dart'; // Import the ChatPage
 import 'screens/calendar_screen.dart'; // Import the PrayerCalendarPage
-// Import the LoginPage
+import 'screens/login_screen.dart'; // Import the LoginPage
 
 import 'package:provider/provider.dart';
 import 'providers/iqamah_provider.dart';
@@ -20,7 +21,7 @@ void main() async {
     name: "eiciqamah",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print("Firebase initialized");
+
   runApp(
     MultiProvider(
       providers: [
@@ -181,6 +182,17 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const NewAboutPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.login_rounded),
+            title: const Text('Login'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
           ),

@@ -12,6 +12,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
+import '../utils/logger.dart';
 
 class IqamahPage extends StatefulWidget {
   const IqamahPage({Key? key}) : super(key: key);
@@ -27,7 +28,8 @@ class _IqamahPageState extends State<IqamahPage> {
   @override
   void initState() {
     super.initState();
-    print('Call registerNotification');
+    super.initState();
+    logger.d('Call registerNotification');
     registerNotification();
 
     DateTime now = DateTime.now();
@@ -62,17 +64,17 @@ class _IqamahPageState extends State<IqamahPage> {
     if (selected != null && selected != selectedDate) {
       selectedDate = selected;
       String formattedDate = DateFormat('y-MM-dd').format(selected);
-      print("Selected formatted date $formattedDate");
+      logger.d("Selected formatted date $formattedDate");
       Provider.of<IqamahProvider>(context, listen: false)
           .fetchIqamahData(formattedDate);
     }
   }
 
   void registerNotification() async {
-    print("Step 2");
+    logger.d("Step 2");
     _messaging = FirebaseMessaging.instance;
 
-    print("Step 3");
+    logger.d("Step 3");
 
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
@@ -82,10 +84,10 @@ class _IqamahPageState extends State<IqamahPage> {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
+      logger.i('User granted permission');
       _messaging.getToken().then((token) async {
-        print('Token got:');
-        print(token);
+        logger.d('Token got:');
+        logger.d(token);
         String platform = 'android';
         if (Platform.isIOS) {
           platform = 'iOS';
@@ -106,29 +108,29 @@ class _IqamahPageState extends State<IqamahPage> {
       });
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print('Got a message whilst in the foreground!');
-        print('Message data: ${message.data}');
+        logger.d('Got a message whilst in the foreground!');
+        logger.d('Message data: ${message.data}');
 
         if (message.notification != null) {
-          print(
+          logger.d(
               'Message also contained a notification: ${message.notification}');
         }
       });
     } else {
-      print('User declined or has not accepted permission');
+      logger.w('User declined or has not accepted permission');
     }
   }
 
   Future<http.Response> registerDeviceToEIC(Map data) async {
     var url = 'https://www.eicsanjose.org/wp/fb_register.php';
-    print('Sending device registration to EICv$url: $data');
+    logger.d('Sending device registration to EICv$url: $data');
 
     var body = json.encode(data);
 
     var response = await http.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"}, body: body);
-    print("EIC Response: ${response.statusCode}");
-    print(response.body);
+    logger.d("EIC Response: ${response.statusCode}");
+    logger.d(response.body);
     return response;
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'iqamah_screen.dart'; // Import the Iqamah page
+import '../utils/logger.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
 
       return userCredential.user;
     } catch (e) {
-      print('Error during Google Sign-In: $e');
+      logger.e('Error during Google Sign-In: $e');
       return null;
     }
   }
@@ -82,6 +83,9 @@ class LoginPage extends StatelessWidget {
               onPressed: () async {
                 final user = await _signInWithGoogle();
                 if (user != null) {
+                  logger.i("User signed in successfully " + user.toString());
+                  SnackBar(
+                      content: Text('Login successful.' + user.toString()));
                   // Navigate to the Iqamah page after successful login
                   Navigator.pushReplacement(
                     context,

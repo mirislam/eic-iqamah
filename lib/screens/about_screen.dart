@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart' as UrlLauncher;
 import 'package:package_info_plus/package_info_plus.dart';
+import '../utils/logger.dart';
 
 class NewAboutPage extends StatefulWidget {
   const NewAboutPage({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ Evergreen Islamic Center (EIC) is a non-profit organization dedicated to serving
                   _buildFeatureIcon(Icons.facebook, 'Facebook', () async {
                     const url = 'https://www.facebook.com/evergreenmasjid';
                     if (await canLaunchUrl(Uri.parse(url))) {
-                      print('Clicked Facebook');
+                      logger.d('Clicked Facebook');
                       await launchUrl(Uri.parse(url),
                           mode: LaunchMode.externalApplication);
                     }
