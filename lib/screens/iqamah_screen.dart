@@ -28,7 +28,6 @@ class _IqamahPageState extends State<IqamahPage> {
   @override
   void initState() {
     super.initState();
-    super.initState();
     logger.d('Call registerNotification');
     registerNotification();
 
@@ -170,12 +169,9 @@ class _IqamahPageState extends State<IqamahPage> {
         onPressed: () {
           _selectDate(context);
         });
-    List<Widget> buttons = [];
+    List<Widget> buttons = [calIconButton];
     if (notificationTexts.length > 10) {
-      buttons.add(calIconButton);
       buttons.add(notifyIconButton);
-    } else {
-      buttons.add(calIconButton);
     }
     return buttons;
   }
@@ -239,111 +235,126 @@ class _IqamahPageState extends State<IqamahPage> {
         return Scaffold(
           backgroundColor: Colors.white,
           drawer: const AppDrawer(),
-          body: !isLoading
-              ? SizedBox(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  child: SafeArea(
-                      minimum: const EdgeInsets.all(10.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
+          body: RefreshIndicator(
+            onRefresh: () async {
+              String formattedDate = DateFormat('y-MM-dd').format(selectedDate);
+              await Provider.of<IqamahProvider>(context, listen: false)
+                  .fetchIqamahData(formattedDate);
+            },
+            child: !isLoading
+                ? ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      SafeArea(
+                          minimum: const EdgeInsets.all(10.0),
+                          child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                    flex: 6,
-                                    child: Container(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        objDateLabel,
-                                        objMessage1,
-                                        objMessage2
-                                      ],
-                                    ))),
-                                Expanded(
-                                    flex: 2,
-                                    child: Column(children: [
-                                      CircleAvatar(
-                                          radius: (52),
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 255, 255, 255),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            child: Image.asset(
-                                                "assets/images/eic_logo_1024_transparent.png"),
-                                          )),
-                                      textButton
-                                    ])),
-                              ],
-                            ),
-                            Row(
                               children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: buildCard4(
-                                      'Fajr الفجر',
-                                      eicIqamah.fajr,
-                                      eicIqamah.fajrStart,
-                                      eicIqamah.fajrStop),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 6,
+                                        child: Container(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            objDateLabel,
+                                            objMessage1,
+                                            objMessage2
+                                          ],
+                                        ))),
+                                    Expanded(
+                                        flex: 2,
+                                        child: Column(children: [
+                                          CircleAvatar(
+                                              radius: (52),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 255, 255, 255),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                child: Image.asset(
+                                                    "assets/images/eic_logo_1024_transparent.png"),
+                                              )),
+                                          textButton
+                                        ])),
+                                  ],
                                 ),
-                                Expanded(
-                                  flex: 4,
-                                  child: buildCard4(
-                                      'Dhur الظهر',
-                                      eicIqamah.duhr,
-                                      eicIqamah.duhrStart,
-                                      eicIqamah.duhrStop),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: buildCard4('Asr العصر', eicIqamah.asr,
-                                      eicIqamah.asrStart, eicIqamah.asrStop),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildCard4(
+                                          'Fajr الفجر',
+                                          eicIqamah.fajr,
+                                          eicIqamah.fajrStart,
+                                          eicIqamah.fajrStop),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildCard4(
+                                          'Dhur الظهر',
+                                          eicIqamah.duhr,
+                                          eicIqamah.duhrStart,
+                                          eicIqamah.duhrStop),
+                                    )
+                                  ],
                                 ),
-                                Expanded(
-                                  flex: 4,
-                                  child: buildCard4(
-                                      'Maghrib المغرب',
-                                      eicIqamah.maghrib,
-                                      eicIqamah.maghribStart,
-                                      eicIqamah.maghribStop),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: buildCard4(
-                                      'Isha العشاء',
-                                      eicIqamah.isha,
-                                      eicIqamah.ishaStart,
-                                      eicIqamah.ishaStop),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildCard4(
+                                          'Asr العصر',
+                                          eicIqamah.asr,
+                                          eicIqamah.asrStart,
+                                          eicIqamah.asrStop),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildCard4(
+                                          'Maghrib المغرب',
+                                          eicIqamah.maghrib,
+                                          eicIqamah.maghribStart,
+                                          eicIqamah.maghribStop),
+                                    )
+                                  ],
                                 ),
-                                Expanded(
-                                  flex: 4,
-                                  child: buildJummahCard(eicIqamah),
-                                )
-                              ],
-                            ),
-                            Expanded(
-                                child: ListView.builder(
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildCard4(
+                                          'Isha العشاء',
+                                          eicIqamah.isha,
+                                          eicIqamah.ishaStart,
+                                          eicIqamah.ishaStop),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: buildJummahCard(eicIqamah),
+                                    )
+                                  ],
+                                ),
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: eventsCount,
                                     itemBuilder:
                                         (BuildContext context, int position) {
                                       return getNewsRows(eicIqamah, position);
-                                    }))
-                          ])))
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                                    })
+                              ]))
+                    ],
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+          ),
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: const Color.fromARGB(255, 25, 114, 0),
